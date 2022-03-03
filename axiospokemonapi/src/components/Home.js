@@ -10,7 +10,7 @@ const Home = (props)=>{
         .then((res)=>{
             console.log(res);
             console.log(res.data);
-            setPokemon(res.data);
+            setPokemon(res.data.results);
         })
         .catch((err)=>console.log(err))
     }
@@ -25,25 +25,25 @@ const Home = (props)=>{
                 </button>
             <hr/>
             <div>
-                {/* {Object.keys(pokemon).map((entry,i)=>(
+                {Object.keys(pokemon).map((entry,i)=>(
                     <li key={i}>
                         <p>
                             {pokemon[entry].name}
                         </p>
                     </li>
-                ))} */}
+                ))}
                 {/* {pokemon}.map(({pokemon.name})=>{
                     <p>
                         {pokemon.name}
                     </p>
                 }) */}
-                {
+                {/* {
                     pokemon?
                 <p>
                     {pokemon.name}
                 </p>
                 :null
-                }
+                } */}
             </div>
         </div>
     )
