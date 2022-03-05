@@ -1,11 +1,11 @@
 const express = require("express");
-const faker = require("faker");
+const {faker} = require("@faker-js/faker");
 const app = express();
 
+// console.log(faker.address.streetName());
 
 const createUser= ()=>{
     const newUser = {
-        _id: faker.user._id(),
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         phoneNumber: faker.phone.phoneNumber(),
@@ -16,10 +16,9 @@ const createUser= ()=>{
 }
 const createCompany= ()=>{
     const newCompany = {
-        _id: faker.company._id(),
         name: faker.company.companyName(),
         address: {
-            street: faker.address.street(),
+            street: faker.address.streetName(),
             city: faker.address.city(),
             state: faker.address.state(),
             zipCode: faker.address.zipCode(),
@@ -28,6 +27,9 @@ const createCompany= ()=>{
     };
     return newCompany;
 }
+
+const newfakeUser= createUser();
+const newfakeCompany = createCompany();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -48,8 +50,8 @@ app.get("/api/users/new", (request, response)=>{
 })
 app.post("/api/users/new", (request, response)=>{
     console.log("this is the new user api post request");
-    response.json(createUser(user))
-    console.log({user: newUser});
+    response.json(newfakeUser)
+    console.log({user: newfakeUser});
 })
 app.get("/api/companies/new", (request, response)=>{
     console.log("this is the new company api route");
@@ -57,8 +59,8 @@ app.get("/api/companies/new", (request, response)=>{
 })
 app.post("/api/companies/new", (request, response)=>{
     console.log("this is the new company api post request");
-    response.json(createCompany(company))
-    console.log({company: newCompany});
+    response.json(newfakeCompany)
+    console.log({company: newfakeCompany});
 })
 app.get("/api/user/company", (request, response)=>{
     console.log("this is the new company and user api route");
@@ -66,8 +68,8 @@ app.get("/api/user/company", (request, response)=>{
 })
 app.post("/api/user/company", (request, response)=>{
     console.log("this is the new company and user api post request");
-    response.json(createCompany(company),createUser(user))
-    console.log([{company: newCompany, user: newUser}]);
+    response.json([{newfakeCompany},{newfakeUser}])
+    console.log([{company: newfakeCompany, user: newfakeUser}]);
 })
 
 app.listen(8000, ()=>console.log("you are connected to port 8000"));
