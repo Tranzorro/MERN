@@ -48,8 +48,8 @@ app.get("/api/users/new", (request, response)=>{
 })
 app.post("/api/users/new", (request, response)=>{
     console.log("this is the new user api post request");
-    response.json({message: createUser(newUser), ourRequestBody: request.body})
-    console.log(request.body);
+    response.json(createUser(user))
+    console.log({user: newUser});
 })
 app.get("/api/companies/new", (request, response)=>{
     console.log("this is the new company api route");
@@ -57,8 +57,8 @@ app.get("/api/companies/new", (request, response)=>{
 })
 app.post("/api/companies/new", (request, response)=>{
     console.log("this is the new company api post request");
-    response.json({message: createCompany(newCompany), ourRequestBody: request.body})
-    console.log(request.body);
+    response.json(createCompany(company))
+    console.log({company: newCompany});
 })
 app.get("/api/user/company", (request, response)=>{
     console.log("this is the new company and user api route");
@@ -66,8 +66,8 @@ app.get("/api/user/company", (request, response)=>{
 })
 app.post("/api/user/company", (request, response)=>{
     console.log("this is the new company and user api post request");
-    response.json({message: [createCompany(newCompany),createUser(newUser)], ourRequestBody: request.body})
-    console.log(request.body);
+    response.json(createCompany(company),createUser(user))
+    console.log([{company: newCompany, user: newUser}]);
 })
 
 app.listen(8000, ()=>console.log("you are connected to port 8000"));
