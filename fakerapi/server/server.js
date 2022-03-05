@@ -5,25 +5,25 @@ const app = express();
 
 const createUser= ()=>{
     const newUser = {
-        _id: faker._id(),
-        firstName: faker.firstName(),
-        lastName: faker.lastName(),
-        phoneNumber: faker.phoneNumber(),
-        email: faker.email(),
-        password: faker.password()
+        _id: faker.user._id(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        phoneNumber: faker.phone.phoneNumber(),
+        email: faker.internet.email(),
+        password: faker.internet.password()
     };
     return newUser;
 }
 const createCompany= ()=>{
     const newCompany = {
-        _id: faker._id(),
-        name: faker.name(),
+        _id: faker.company._id(),
+        name: faker.company.companyName(),
         address: {
-            street: faker.street(),
-            city: faker.city(),
-            state: faker.state(),
-            zipCode: faker.zipCode(),
-            country: faker.country(),
+            street: faker.address.street(),
+            city: faker.address.city(),
+            state: faker.address.state(),
+            zipCode: faker.address.zipCode(),
+            country: faker.address.country(),
         }
     };
     return newCompany;
@@ -48,7 +48,7 @@ app.get("/api/users/new", (request, response)=>{
 })
 app.post("/api/users/new", (request, response)=>{
     console.log("this is the new user api post request");
-    response.json({message: createUser(), ourRequestBody: request.body})
+    response.json({message: createUser(newUser), ourRequestBody: request.body})
     console.log(request.body);
 })
 app.get("/api/companies/new", (request, response)=>{
@@ -57,7 +57,7 @@ app.get("/api/companies/new", (request, response)=>{
 })
 app.post("/api/companies/new", (request, response)=>{
     console.log("this is the new company api post request");
-    response.json({message: createCompany(), ourRequestBody: request.body})
+    response.json({message: createCompany(newCompany), ourRequestBody: request.body})
     console.log(request.body);
 })
 app.get("/api/user/company", (request, response)=>{
@@ -66,7 +66,7 @@ app.get("/api/user/company", (request, response)=>{
 })
 app.post("/api/user/company", (request, response)=>{
     console.log("this is the new company and user api post request");
-    response.json({message: [createCompany(),createUser()], ourRequestBody: request.body})
+    response.json({message: [createCompany(newCompany),createUser(newUser)], ourRequestBody: request.body})
     console.log(request.body);
 })
 
