@@ -7,9 +7,9 @@ App.use(cors());
 
 require("./config/mongoose.config");
 
-App.get('/', (req,res) =>{
-    return res.json({ message: "sup ninja."});
-})
+// App.get('/', (req,res) =>{
+//     return res.json({ message: "sup ninja."});
+// })
 
 const productRoutes = require("./routes/product.routes");
 productRoutes(App);

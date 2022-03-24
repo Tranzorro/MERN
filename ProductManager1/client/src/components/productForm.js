@@ -1,5 +1,6 @@
 import React, { useState } from  'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
     
 const ProductForm = () => {
     const [Title, setTitle] = useState("");
@@ -62,6 +63,7 @@ const ProductForm = () => {
     return(
         <form onSubmit={onSubmitHandler} >
             <div>
+                <h1> Product Manager </h1>
                 <label>Title: </label> 
                 <input type="text" onChange={ (e) => setTitle(e.target.value) } />
                 {
@@ -89,6 +91,7 @@ const ProductForm = () => {
                 }
             </div>
             <input type="submit" value="Create Product" />
+            <Link to={'/all'}> view all products</Link>
         </form>
     );
 };
