@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from  'react';
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
 import {Link} from 'react-router-dom';
 
 const DisplayOneProduct = (props) =>{
-
-    // const [ removeFromDom, theProduct, setTheProduct] = useState({});
-    const {removeFromDom, theProduct, setTheProduct} = props;
+    const navigate = useNavigate();
+    const [theProduct, setTheProduct] = useState({});
+    const {removeFromDom} = props;
     const {id} = useParams();
     const deleteProduct = (id) =>{
         axios.delete('http://localhost:8000/api/products/delete/' + id)
         .then((res)=>{
             removeFromDom(id);
+            navigate("/"); 
         })
         .catch((err)=>console.log(err))
     }
-
+    
     useEffect(() =>{
-        axios.get('http://localhost:8000/api/products/' + id)
+        axios.get(`http://localhost:8000/api/products/${id}`)
         .then((res)=>{
             console.log(res);
             console.log(res.data);
-            setTheProduct(res.data);
+            console.log(id);
+            setTheProduct(res.data); //errors out here
         })
-        .catch((err)=>console.log(err))
-    },[])
+        .catch((err)=>console.log(err));
+    },[]);
 
     return(
         <div>
