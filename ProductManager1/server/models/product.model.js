@@ -6,8 +6,8 @@ const ProductSchema = new mongoose.Schema({
     Title: {
         type: String,
         message: "needs a name, duh",
-        required: [true,"needs a name, duh"],
         minlength: 4,
+        required: [true,"needs a name, duh"],
     },
     Price: {
         type: Number,

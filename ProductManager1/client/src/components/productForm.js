@@ -9,7 +9,7 @@ const ProductForm = () => {
     // const [TitleError, setTitleError] = useState(""); 
     // const [PriceError, setPriceError] = useState(""); 
     // const [DescriptionError, setDescriptionError] = useState("");
-    const [errors, setErrors] = useState([]); 
+    const [errors, setErrors] = useState({}); 
     
     const onSubmitHandler = (e) => {
         e.preventDefault();

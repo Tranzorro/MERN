@@ -66,6 +66,14 @@ const UpdateProduct = (props) => {
                     name="Price"
                     value={Price} 
                     onChange={(e) => { setPrice(e.target.value) }} />
+                    {
+                    errors.Price ?
+                    <p>{errors.Price.message}</p>
+                    : null
+                    // PriceError?
+                    // <p>{PriceError}</p>
+                    // : ''
+                }
                 </p>
                 <p>
                     <label>Description</label><br />
@@ -73,6 +81,14 @@ const UpdateProduct = (props) => {
                     name="Description"
                     value={Description} 
                     onChange={(e) => { setDescription(e.target.value) }} />
+                    {
+                    errors.Description ?
+                    <p>{errors.Description.message}</p>
+                    : null
+                    // DescriptionError?
+                    // <p>{DescriptionError}</p>
+                    // : ''
+                }
                 </p>
                 <input type="submit" />
             </form>
