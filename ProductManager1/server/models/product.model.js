@@ -5,14 +5,18 @@ const  mongoose = require("mongoose");
 const ProductSchema = new mongoose.Schema({
     Title: {
         type: String,
+        message: "needs a name, duh",
+        required: [true,"needs a name, duh"],
         minlength: 4,
     },
     Price: {
         type: Number,
+        required: [true,"how expensive is it?"],
         minlength: 1,
     },
     Description: {
         type: String,
+        required: [true,"what is it?"],
         minlength: 10,
     },
 }, {timestamps: true});

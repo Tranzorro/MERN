@@ -8,6 +8,7 @@ const UpdateProduct = (props) => {
     const [Price, setPrice] = useState("");
     const [Description, setDescription] = useState("");
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({}); 
     
     useEffect(() =>{
         axios.get('http://localhost:8000/api/products/' + id)
@@ -22,6 +23,7 @@ const UpdateProduct = (props) => {
     },[])
     const updateProduct = (e) => {
         e.preventDefault();
+        console.log(id);
         axios.put('http://localhost:8000/api/products/edit/' + id, {
             Title,
             Price,
@@ -29,20 +31,34 @@ const UpdateProduct = (props) => {
         })
             .then(res => {
                 console.log(res);
-                navigate("/"); 
+                // navigate("/"); 
             })
-            .catch(err => console.log(err))
+            // .catch(err => console.log(err))
+            .catch(err =>{
+                console.log("===");
+                console.log(err.response.data.errors);
+                setErrors(err.response.data.errors);
+            })
     }
     return (
         <div>
             <h1>Update a Product</h1>
             <form onSubmit={updateProduct}>
+            {/* {errors.map((err,index) => <p key={index}>{err} </p>)} */}
                 <p>
                     <label>Title</label><br />
                     <input type="text" 
                     name="Title" 
                     value={Title} 
                     onChange={(e) => { setTitle(e.target.value) }} />
+                    {
+                    errors.Title ?
+                    <p>{errors.Title.message}</p>
+                    : null
+                    // TitleError?
+                    // <p>{TitleError}</p>
+                    // : ''
+                }
                 </p>
                 <p>
                     <label>Price</label><br />

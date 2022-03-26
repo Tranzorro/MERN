@@ -46,7 +46,7 @@ module.exports.putById = (req, res) => {
         })
         .catch((err) =>{
             console.log("error:" + err);
-            return res.json(err);
+            return res.status(400).json(err);
         })
 }
 module.exports.deleteById = (req, res) => {

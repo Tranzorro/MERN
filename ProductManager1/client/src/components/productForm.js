@@ -6,9 +6,10 @@ const ProductForm = () => {
     const [Title, setTitle] = useState("");
     const [Price, setPrice] = useState("");
     const [Description, setDescription] = useState("");
-    const [TitleError, setTitleError] = useState(""); 
-    const [PriceError, setPriceError] = useState(""); 
-    const [DescriptionError, setDescriptionError] = useState("");
+    // const [TitleError, setTitleError] = useState(""); 
+    // const [PriceError, setPriceError] = useState(""); 
+    // const [DescriptionError, setDescriptionError] = useState("");
+    const [errors, setErrors] = useState([]); 
     
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -25,7 +26,10 @@ const ProductForm = () => {
             // setPrice(res.data.results);
             // setDescription(res.data.results);
         })
-        .catch((err)=>console.log(err))
+        // .catch((err)=>console.log(err))
+        .catch(err =>{
+            setErrors(err.response.data.errors);
+        })
 }
 
     // const validatorEvent = (e) => {
@@ -62,32 +66,42 @@ const ProductForm = () => {
     
     return(
         <form onSubmit={onSubmitHandler} >
+            {errors.map((err,index) => <p key={index}>{err} </p>)}
             <div>
                 <h1> Product Manager </h1>
                 <label>Title: </label> 
                 <input type="text" onChange={ (e) => setTitle(e.target.value) } />
                 {
-                    TitleError?
-                    <p>{TitleError}</p>
-                    : ''
+                    errors.Title ?
+                    <p>{errors.Title.message}</p>
+                    : null
+                    // TitleError?
+                    // <p>{TitleError}</p>
+                    // : ''
                 }
             </div>
             <div>
                 <label>Price: </label> 
                 <input type="text" onChange={ (e) => setPrice(e.target.value) } />
                 {
-                    PriceError?
-                    <p>{PriceError}</p>
-                    : ''
+                    errors.Price ?
+                    <p>{errors.Price.message}</p>
+                    : null
+                    // PriceError?
+                    // <p>{PriceError}</p>
+                    // : ''
                 }
             </div>
             <div>
                 <label>Description: </label> 
                 <input type="text" onChange={ (e) => setDescription(e.target.value) } />
                 {
-                    DescriptionError?
-                    <p>{DescriptionError}</p>
-                    : ''
+                    errors.Description ?
+                    <p>{errors.Description.message}</p>
+                    : null
+                    // DescriptionError?
+                    // <p>{DescriptionError}</p>
+                    // : ''
                 }
             </div>
             <input type="submit" value="Create Product" />
